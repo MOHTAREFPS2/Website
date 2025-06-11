@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>تحميل محمي</title>
+  <script>
+    window.onload = function () {
+      // روابط موقع Shrink المسموحة
+      const allowedDomains = ["shrinkme.io", "shrinke.me", "shrinkme.link"];
+      const referrer = document.referrer;
+
+      // إذا ماكو referrer أو ما يحتوي على أحد المواقع المسموحة
+      const isAllowed = allowedDomains.some(domain => referrer.includes(domain));
+
+      if (!referrer || !isAllowed) {
+        document.body.innerHTML = `
+          <h1 style="color:red;">🚫 الوصول مرفوض</h1>
+          <p>يرجى الرجوع إلى الرابط المختصر لتحميل الملف بشكل صحيح.</p>
+        `;
+        return;
+      }
+
+      // ✅ السماح بالتحميل
+      window.location.href = "https://drive.google.com/uc?export=download&id=1o-p873du2DncFN7GlFvhJwIDWPh70tYq";
+    };
+  </script>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+    p {
+      font-size: 18px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📥 جاري التحقق من المصدر...</h1>
+</body>
+</html>
