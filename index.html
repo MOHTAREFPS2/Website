@@ -5,45 +5,41 @@
   <title>تحميل محمي</title>
   <script>
     window.onload = function () {
-      // روابط موقع Shrink المسموحة
-      const allowedDomains = ["shrinkme.io", "shrinke.me", "shrinkme.link"];
-      const referrer = document.referrer;
+      const urlParams = new URLSearchParams(window.location.search);
+      const secretCode = urlParams.get("code");
 
-      // إذا ماكو referrer أو ما يحتوي على أحد المواقع المسموحة
-      const isAllowed = allowedDomains.some(domain => referrer.includes(domain));
-
-      if (!referrer || !isAllowed) {
+      // التحقق من الكود
+      if (secretCode !== "mhtrf987") {
         document.body.innerHTML = `
           <h1 style="color:red;">🚫 الوصول مرفوض</h1>
-          <p>يرجى الرجوع إلى الرابط المختصر لتحميل الملف بشكل صحيح.</p>
+          <p>هذا الرابط غير مصرح به. يرجى العودة إلى الرابط المختصر.</p>
         `;
         return;
       }
 
-      // ✅ السماح بالتحميل
+      // 🔒 إخفاء الكود من الرابط بدون إعادة تحميل
+      const newURL = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, newURL);
+
+      // ✅ تحميل مباشر
       window.location.href = "https://drive.google.com/uc?export=download&id=1o-p873du2DncFN7GlFvhJwIDWPh70tYq";
     };
   </script>
   <style>
     body {
-      background-color: #121212;
+      background-color: #111;
       color: white;
       font-family: Arial, sans-serif;
       height: 100vh;
-      margin: 0;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       flex-direction: column;
       text-align: center;
-    }
-    p {
-      font-size: 18px;
-      margin-top: 15px;
     }
   </style>
 </head>
 <body>
-  <h1>📥 جاري التحقق من المصدر...</h1>
+  <h1>🔐 جاري التحقق من الرابط...</h1>
 </body>
 </html>
