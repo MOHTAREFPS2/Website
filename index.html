@@ -1,45 +1,69 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <title>تحميل محمي</title>
-  <script>
-    window.onload = function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const secretCode = urlParams.get("code");
-
-      // التحقق من الكود
-      if (secretCode !== "mhtrf987") {
-        document.body.innerHTML = `
-          <h1 style="color:red;">🚫 الوصول مرفوض</h1>
-          <p>هذا الرابط غير مصرح به. يرجى العودة إلى الرابط المختصر.</p>
-        `;
-        return;
-      }
-
-      // 🔒 إخفاء الكود من الرابط بدون إعادة تحميل
-      const newURL = window.location.origin + window.location.pathname;
-      window.history.replaceState({}, document.title, newURL);
-
-      // ✅ تحميل مباشر
-      window.location.href = "https://drive.google.com/uc?export=download&id=1o-p873du2DncFN7GlFvhJwIDWPh70tYq";
-    };
-  </script>
-  <style>
-    body {
-      background-color: #111;
-      color: white;
-      font-family: Arial, sans-serif;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة التحميل</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin-top: 80px;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .download-btn {
+            background-color: #28a745; /* لون أخضر جذاب */
+            border: none;
+            color: white;
+            padding: 18px 38px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.2em;
+            margin: 10px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .download-btn:hover {
+            background-color: #218838; /* لون أخضر أغمق عند التمرير */
+            transform: translateY(-2px);
+        }
+        .download-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+    </style>
 </head>
 <body>
-  <h1>🔐 جاري التحقق من الرابط...</h1>
+    <h1>شكراً لك!</h1>
+    <p>لقد اجتزت الخطوات بنجاح. ملفك جاهز للتحميل الآن.</p>
+    <button id="startDownload" class="download-btn">بدء التحميل</button>
+
+    <script>
+        document.getElementById('startDownload').addEventListener('click', function() {
+            // هذا هو الجزء الأهم: استبدل file_id بالمعرف الفعلي لملفك في جوجل درايف
+            // الذي هو: 1076PABoP6L7QUZiAvi2kkJs20hieP5Z2
+            window.location.href = 'download_proxy.php?file_id=1076PABoP6L7QUZiAvi2kkJs20hieP5Z2';
+
+            // تعطيل الزر بعد النقر لمنع التحميل المتعدد وتوضيح أن العملية بدأت
+            this.disabled = true;
+            this.textContent = 'التحميل جاري... يرجى الانتظار';
+        });
+    </script>
 </body>
 </html>
